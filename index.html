@@ -10,6 +10,25 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Core theme CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- GoatCounter Tracking -->
+    <script data-goatcounter="https://devopslernen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <script>
+      // Automatic Click Tracking for Linktree Links
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            var label = this.innerText.trim().split('\n')[0]; // Use first line of text as label
+            if (window.goatcounter && window.goatcounter.count) {
+              window.goatcounter.count({
+                path: label.replace(/\s+/g, '-').toLowerCase(),
+                title: 'Click: ' + label,
+                event: true
+              });
+            }
+          });
+        });
+      });
+    </script>
   </head>
 
   <body>
@@ -44,6 +63,45 @@
     </div>
 
     <div id="links">
+      <!-- Newsletter Signup Form -->
+    <div class="newsletter-box">
+      <h3 class="newsletter-title">Subscribe to the newsletter for helpful tips and special offers.</h3>
+      <form action="https://app.kit.com/forms/9066155/subscriptions" method="post" data-sv-form="9066155"
+        data-uid="3fd8275b5a" data-format="inline" data-version="5" class="newsletter-form" id="newsletter-form">
+        <input type="email" name="email_address" placeholder="Your email address" required class="newsletter-input">
+        <button type="submit" class="newsletter-button">Subscribe</button>
+      </form>
+      <div class="newsletter-success" id="newsletter-success">
+        Please <span style="color: #ff4444; font-weight: bold; font-size: 15pt;">check your spam folder and
+          inbox</span> and confirm your subscription. Successfully registered!
+      </div>
+      <p class="newsletter-disclaimer">Unsubscribe at any time.</p>
+    </div>
+    <script>
+      document.getElementById('newsletter-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var form = this;
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        }).then(function (response) {
+          if (response.ok) {
+            form.style.display = 'none';
+            document.getElementById('newsletter-success').classList.add('show');
+          }
+        }).catch(function (error) {
+          // Fallback: submit normally if fetch fails
+          form.submit();
+        });
+      });
+    </script>
+    <!-- End Newsletter Signup Form -->
+
     <a class="link" href="https://www.udemy.com/course/powershell-hands-on-course/?couponCode=LINK-2026-01" target="_blank" style="background-image: url('img/powershell-en-sq.jpg');">
         PowerShell Hands-On Course – From Beginner to Pro
         <br>only 12.99
