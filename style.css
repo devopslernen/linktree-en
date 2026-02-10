@@ -1,4 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+/* Karla Regular */
+@font-face {
+    font-family: 'Karla';
+    src: url('/fonts/Karla-Regular.woff2') format('woff2'),
+         url('/fonts/Karla-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Karla Bold */
+@font-face {
+    font-family: 'Karla';
+    src: url('/fonts/Karla-Bold.woff2') format('woff2'),
+         url('/fonts/Karla-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
     --bgColor: #223344;
@@ -72,6 +90,12 @@ body {
     background-repeat: no-repeat;
     background-position: 20px center;
     background-size: 60px auto;
+}
+
+.link-left {
+    display: block;
+    text-align: center;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
