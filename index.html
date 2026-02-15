@@ -10,29 +10,26 @@
     <link rel="stylesheet" href="all.css">
     <!-- Core theme CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- GoatCounter Tracking -->
-    <script data-goatcounter="https://devopslernen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-    <script>
-      // Automatic Click Tracking for Linktree Links
-      document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.link').forEach(function (link) {
-          link.addEventListener('click', function () {
-            var label = this.innerText.trim().split('\n')[0]; // Use first line of text as label
-            if (window.goatcounter && window.goatcounter.count) {
-              window.goatcounter.count({
-                path: label.replace(/\s+/g, '-').toLowerCase(),
-                title: 'Click: ' + label,
-                event: true
-              });
-            }
-          });
-        });
-      });
-    </script>
-  </head>
+</head>
 
-  <body>
-    <!-- Parallax Pixel Background Animation -->
+<body>
+<div id="consent-overlay" class="consent-overlay">
+  <div class="consent-modal">
+    <h3>Tracking & Analyse</h3>
+    <p>
+      We use GoatCounter to analyze page views and clicks.
+      This helps us optimize our IT courses and offerings.
+    </p>
+
+    <div class="consent-buttons">
+      <button class="consent-accept" onclick="acceptTracking()">Accept</button>
+      <button class="consent-decline" onclick="declineTracking()">Decline</button>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Parallax Pixel Background Animation -->
     <section class="animated-background">
       <div id="stars1"></div>
       <div id="stars2"></div>
@@ -107,7 +104,7 @@
         PowerShell Hands-On Course – From Beginner to Pro
         <br>only 12.99
     </a>
-    <a class="link" href="hhttps://www.udemy.com/course/ansible-it-automation-for-beginners/?couponCode=LINK-2026-02" target="_blank" style="background-image: url('img/ansible-beginner-en.jpg');">
+    <a class="link" href="https://www.udemy.com/course/ansible-it-automation-for-beginners/?couponCode=LINK-2026-02" target="_blank" style="background-image: url('img/ansible-beginner-en.jpg');">
         <span class="link-left">CLICK here:</span>
         Ansible: IT Automation for Beginners 2025
         <br>only 12.99
@@ -152,5 +149,65 @@
     <div id="hashtag">
       Special Discount on IT Courses
     </div>
+
+    <script>
+    (function () {
+    
+      function loadGoatCounter() {
+        if (window.goatLoaded) return;
+        window.goatLoaded = true;
+    
+        const script = document.createElement("script");
+        script.src = "//gc.zgo.at/count.js";
+        script.async = true;
+        script.setAttribute(
+          "data-goatcounter",
+          "https://devopslernen.goatcounter.com/count"
+        );
+        document.body.appendChild(script);
+      }
+    
+      function hideBanner() {
+        const overlay = document.getElementById("consent-overlay");
+        overlay.style.display = "none";
+        document.body.classList.remove("no-scroll");
+      }
+    
+      window.acceptTracking = function () {
+        localStorage.setItem("trackingConsent", "accepted");
+        hideBanner();
+        loadGoatCounter();
+      };
+    
+      window.declineTracking = function () {
+        localStorage.setItem("trackingConsent", "declined");
+        hideBanner();
+      };
+    
+      document.addEventListener("DOMContentLoaded", function () {
+        const consent = localStorage.getItem("trackingConsent");
+        const overlay = document.getElementById("consent-overlay");
+    
+        if (consent === "accepted") {
+          loadGoatCounter();
+          overlay.style.display = "none";
+          document.body.classList.remove("no-scroll");
+          return;
+        }
+    
+        if (consent === "declined") {
+          overlay.style.display = "none";
+          document.body.classList.remove("no-scroll");
+          return;
+        }
+    
+        // KEINE Entscheidung → Banner zeigen
+        overlay.style.display = "flex";
+        document.body.classList.add("no-scroll");
+      });
+    
+    })();
+  </script>
+
   </body>
 </html>
