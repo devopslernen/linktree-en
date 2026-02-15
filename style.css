@@ -115,6 +115,30 @@ html, body {
   overflow: hidden;
 }
 
+.footer-legal {
+  text-align: center;
+  margin: 60px 0 40px;
+}
+
+.legal-button {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ffffff;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+.legal-button:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
 
 /* Karla Regular */
 @font-face {
