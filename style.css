@@ -131,6 +131,7 @@ html, body {
   border: 1px solid rgba(255,255,255,0.2);
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
   transition: all .2s ease;
 }
 
@@ -138,6 +139,7 @@ html, body {
   background: rgba(255,255,255,0.15);
   transform: translateY(-2px);
 }
+
 
 
 /* Karla Regular */
