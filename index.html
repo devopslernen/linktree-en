@@ -151,67 +151,88 @@
     </div>
 
     <script>
-    (function () {
+  (function () {
+  
+  function openConsentSettingsLocal() {
+    const overlay = document.getElementById("consent-overlay");
+    overlay.style.display = "flex";
+    document.body.classList.add("no-scroll");
+  
+    // Automatisch ins Zentrum scrollen
+    overlay.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  
+  window.openConsentSettings = openConsentSettingsLocal;
+  
     
-      function loadGoatCounter() {
-        if (window.goatLoaded) return;
-        window.goatLoaded = true;
-    
-        const script = document.createElement("script");
-        script.src = "//gc.zgo.at/count.js";
-        script.async = true;
-        script.setAttribute(
-          "data-goatcounter",
-          "https://devopslernen.goatcounter.com/count"
-        );
-        document.body.appendChild(script);
-      }
-    
-      function hideBanner() {
-        const overlay = document.getElementById("consent-overlay");
+    function revokeTrackingLocal() {
+      localStorage.removeItem("trackingConsent");
+      window.goatcounter = undefined;
+      const existingScript = document.querySelector('script[data-goatcounter]');
+      if (existingScript) existingScript.remove();
+      openConsentSettingsLocal();
+    }
+  
+    function loadGoatCounter() {
+      if (window.goatLoaded) return;
+      window.goatLoaded = true;
+  
+      const script = document.createElement("script");
+      script.src = "//gc.zgo.at/count.js";
+      script.async = true;
+      script.setAttribute("data-goatcounter", "https://devopslernen.goatcounter.com/count");
+      document.body.appendChild(script);
+    }
+  
+    function hideBanner() {
+      const overlay = document.getElementById("consent-overlay");
+      overlay.style.display = "none";
+      document.body.classList.remove("no-scroll");
+    }
+  
+    window.openConsentSettings = openConsentSettingsLocal;
+    window.revokeTracking = revokeTrackingLocal;
+    window.acceptTracking = function () {
+      localStorage.setItem("trackingConsent", "accepted");
+      hideBanner();
+      loadGoatCounter();
+    };
+    window.declineTracking = function () {
+      localStorage.setItem("trackingConsent", "declined");
+      hideBanner();
+    };
+  
+    document.addEventListener("DOMContentLoaded", function () {
+      const consent = localStorage.getItem("trackingConsent");
+      const overlay = document.getElementById("consent-overlay");
+  
+      if (consent === "accepted") {
+        loadGoatCounter();
         overlay.style.display = "none";
         document.body.classList.remove("no-scroll");
+        return;
       }
-    
-      window.acceptTracking = function () {
-        localStorage.setItem("trackingConsent", "accepted");
-        hideBanner();
-        loadGoatCounter();
-      };
-    
-      window.declineTracking = function () {
-        localStorage.setItem("trackingConsent", "declined");
-        hideBanner();
-      };
-    
-      document.addEventListener("DOMContentLoaded", function () {
-        const consent = localStorage.getItem("trackingConsent");
-        const overlay = document.getElementById("consent-overlay");
-    
-        if (consent === "accepted") {
-          loadGoatCounter();
-          overlay.style.display = "none";
-          document.body.classList.remove("no-scroll");
-          return;
-        }
-    
-        if (consent === "declined") {
-          overlay.style.display = "none";
-          document.body.classList.remove("no-scroll");
-          return;
-        }
-    
-        // KEINE Entscheidung → Banner zeigen
-        overlay.style.display = "flex";
-        document.body.classList.add("no-scroll");
-      });
-    
-    })();
+  
+      if (consent === "declined") {
+        overlay.style.display = "none";
+        document.body.classList.remove("no-scroll");
+        return;
+      }
+  
+      overlay.style.display = "flex";
+      document.body.classList.add("no-scroll");
+    });
+  
+  })();
   </script>
-<div class="footer-legal">
-  <a href="dataprotection.html" target="_blank" class="legal-button">
-    Privacy Policy
-  </a>
-</div>
+  <div class="footer-legal">
+    <a href="dataprotection.html" target="_blank" class="legal-button">
+      Privacy Policy
+    </a>
+    
+    <button onclick="openConsentSettings()" class="legal-button">
+      Tracking Settings
+    </button>
+  </div>
   </body>
 </html>
