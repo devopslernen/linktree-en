@@ -13,18 +13,14 @@
 </head>
 
 <body>
-<div id="consent-overlay" class="consent-overlay">
-  <div class="consent-modal">
-    <h3>Tracking & Analyse</h3>
-    <p>
-      We use GoatCounter to analyze page views and clicks.
-      This helps us optimize our IT courses and offerings.
-    </p>
-
-    <div class="consent-buttons">
-      <button class="consent-accept" onclick="acceptTracking()">Accept</button>
-      <button class="consent-decline" onclick="declineTracking()">Decline</button>
-    </div>
+<div id="consent-bar" class="consent-bar" role="dialog" aria-label="Tracking settings" hidden>
+  <p class="consent-text">
+    We'd like to count page views and clicks with GoatCounter (no cookies) to improve our courses.
+    <a href="dataprotection.html" target="_blank">Privacy</a>
+  </p>
+  <div class="consent-buttons">
+    <button class="consent-accept" onclick="acceptTracking()">Accept</button>
+    <button class="consent-decline" onclick="declineTracking()">Decline</button>
   </div>
 </div>
 
@@ -99,176 +95,60 @@
     </script>
     <!-- End Newsletter Signup Form -->
       
-    <a class="link" href="https://www.udemy.com/course/openai-codex-agentic-engineering-next-level-ai-development/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/codex-thumbnail-en-sq.png');">
-        <span class="link-left">CLICK here:</span>
-        Codex & Agentic Engineering: Next-Level AI Development
-        <br>only 12.99
-    </a>       
-    <a class="link" href="https://www.udemy.com/course/linux-security-hardening-auditing-practical-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/thumb-tux-security-1-lock-dark-sq.png');">
-        <span class="link-left">CLICK here:</span>
-        Linux Security Hardening & Auditing: Practical Course
-        <br>only 12.99
-    </a> 
-      
-    <a class="link" href="https://www.udemy.com/course/next-level-linux-system-administration-with-claude-code/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/thumb-tux-auto-orange-sq.png');">
-        <span class="link-left">CLICK here:</span>
-        Next-Level Linux System Administration with Claude Code
-        <br>only 12.99
-    </a> 
-      
-    <a class="link" href="https://www.udemy.com/course/next-level-windows-system-administration-with-claude-code/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/claude-windows.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Next-Level Windows System Administration with Claude Code
-        <br>only 12.99
-    </a>  
-
-    <a class="link" href="https://www.udemy.com/course/next-level-system-administration-devops-via-claude-code/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/claude-server.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Next-Level System Administration & DevOps via Claude Code
-        <br>only 12.99
-    </a>  
-
-    <a class="link" href="https://www.udemy.com/course/claude-code-agentic-engineering-next-level-ai-development/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/claude-code-en.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Claude Code & Agentic Engineering: Next-Level AI Development
-        <br>only 12.99
-    </a>      
-    <a class="link" href="https://www.udemy.com/course/ansible-masterclass-en/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/thumbnail-en-sq.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Ansible Masterclass – From Beginner to Expert 2026
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/ansible-it-automation-for-beginners/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/ansible-beginner-en.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Ansible: IT Automation for Beginners 2025
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/ansible-advanced-hands-on-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/ansible-advanced-en.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Ansible Advanced – Hands-On Course 2025
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/ansible-awx-hands-on-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/awx-en.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Ansible AWX Hands-On Course 2026
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/powershell-hands-on-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/powershell-en-sq.jpg');">
-        <span class="link-left">CLICK here:</span>
-        PowerShell Hands-On Course – From Beginner to Pro
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/windows-server-2025-hands-on-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/server2025-en.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Windows Server 2025 – Beginner-Friendly Hands-On Course
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/microsoft-hyper-v-on-windows-server-2025-windows-11/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/hyper-v.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Microsoft Hyper-V on Windows Server 2025 & Windows 11
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/proxmox-hands-on-masterclass-from-beginner-to-expert/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/prox_master.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Proxmox Hands-On Masterclass - From Beginner to Expert
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/fortinet-fortigate-pracical-firewalling-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/fortinet.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Fortinet FortiGate: Pracical Firewalling Course
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/proxmox-ve-8-practical-course-on-virtualization/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/proxmox.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Proxmox VE 8 Practical Course on Virtualization
-        <br>only 12.99
-    </a>
-    <a class="link" href="https://www.udemy.com/course/proxmox-ve-advanced-virtualization-hands-on-course/?couponCode=LINK-2026-09" target="_blank" style="background-image: url('img/proxmox-advanced.jpg');">
-        <span class="link-left">CLICK here:</span>
-        Proxmox VE 8 Advanced - Virtualization Hands-on Course
-        <br>only 12.99
-    </a>
+    <nav id="course-filter" class="course-filter" aria-label="Categories"></nav>
+    <div id="courses"></div>
+    <noscript>
+      <p class="noscript">Please enable JavaScript to see the course list.</p>
+    </noscript>
     </div>
 
     <div id="hashtag">
       Special Discount on IT Courses
     </div>
 
-    <script>
-  (function () {
-  
-  function openConsentSettingsLocal() {
-    const overlay = document.getElementById("consent-overlay");
-    overlay.style.display = "flex";
-    document.body.classList.add("no-scroll");
-  
-    // Automatisch ins Zentrum scrollen
-    overlay.scrollIntoView({ behavior: "smooth", block: "center" });
+<script src="courses.js"></script>
+<script src="app.js"></script>
+<script>
+(function () {
+  var bar = document.getElementById("consent-bar");
+
+  function loadGoatCounter() {
+    if (window.goatLoaded) return;
+    window.goatLoaded = true;
+
+    var script = document.createElement("script");
+    script.src = "//gc.zgo.at/count.js";
+    script.async = true;
+    script.setAttribute("data-goatcounter", "https://devopslernen.goatcounter.com/count");
+    document.body.appendChild(script);
   }
-  
-  window.openConsentSettings = openConsentSettingsLocal;
-  
-    
-    function revokeTrackingLocal() {
-      localStorage.removeItem("trackingConsent");
-      window.goatcounter = undefined;
-      const existingScript = document.querySelector('script[data-goatcounter]');
-      if (existingScript) existingScript.remove();
-      openConsentSettingsLocal();
-    }
-  
-    function loadGoatCounter() {
-      if (window.goatLoaded) return;
-      window.goatLoaded = true;
-  
-      const script = document.createElement("script");
-      script.src = "//gc.zgo.at/count.js";
-      script.async = true;
-      script.setAttribute("data-goatcounter", "https://devopslernen.goatcounter.com/count");
-      document.body.appendChild(script);
-    }
-  
-    function hideBanner() {
-      const overlay = document.getElementById("consent-overlay");
-      overlay.style.display = "none";
-      document.body.classList.remove("no-scroll");
-    }
-  
-    window.openConsentSettings = openConsentSettingsLocal;
-    window.revokeTracking = revokeTrackingLocal;
-    window.acceptTracking = function () {
-      localStorage.setItem("trackingConsent", "accepted");
-      hideBanner();
-      loadGoatCounter();
-    };
-    window.declineTracking = function () {
-      localStorage.setItem("trackingConsent", "declined");
-      hideBanner();
-    };
-  
-    document.addEventListener("DOMContentLoaded", function () {
-      const consent = localStorage.getItem("trackingConsent");
-      const overlay = document.getElementById("consent-overlay");
-  
-      if (consent === "accepted") {
-        loadGoatCounter();
-        overlay.style.display = "none";
-        document.body.classList.remove("no-scroll");
-        return;
-      }
-  
-      if (consent === "declined") {
-        overlay.style.display = "none";
-        document.body.classList.remove("no-scroll");
-        return;
-      }
-  
-      overlay.style.display = "flex";
-      document.body.classList.add("no-scroll");
-    });
-  
-  })();
-  </script>
+
+  function showBar() {
+    bar.hidden = false;
+    document.body.classList.add("has-consent-bar");
+  }
+
+  function hideBar() {
+    bar.hidden = true;
+    document.body.classList.remove("has-consent-bar");
+  }
+
+  window.openConsentSettings = showBar;
+  window.acceptTracking = function () {
+    localStorage.setItem("trackingConsent", "accepted");
+    hideBar();
+    loadGoatCounter();
+  };
+  window.declineTracking = function () {
+    localStorage.setItem("trackingConsent", "declined");
+    hideBar();
+  };
+
+  var consent = localStorage.getItem("trackingConsent");
+  if (consent === "accepted") loadGoatCounter();
+  else if (consent !== "declined") showBar();
+})();
+</script>
   <div class="footer-legal">
     <a href="dataprotection.html" target="_blank" class="legal-button">
       Privacy Policy

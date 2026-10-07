@@ -11,43 +11,66 @@ html, body {
   height: 100vh;
 }
 
-.consent-overlay {
+.consent-bar {
   position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(8px);
-  z-index: 999999;
-
-  display: none;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 640px;
+  box-sizing: border-box;
+  display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.consent-modal {
+  gap: 16px;
+  padding: 14px 18px;
   background: rgba(20, 20, 30, 0.95);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 35px;
-  max-width: 480px;
-  width: 90%;
+  border: 1px solid rgba(255,255,255,0.15);
   border-radius: 14px;
-  text-align: center;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
-  animation: consentFadeIn 0.4s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  z-index: 999999;
+  animation: consentSlideIn 0.4s ease;
 }
 
-.consent-modal h3 {
-  margin-bottom: 15px;
-  font-size: 20px;
+@keyframes consentSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.consent-bar[hidden] {
+  display: none;
+}
+
+.consent-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+
+.consent-text a {
   color: #ffffff;
 }
 
-.consent-modal p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #cccccc;
-  margin-bottom: 25px;
+.consent-bar .consent-buttons {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 560px) {
+  .consent-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+body.has-consent-bar {
+  padding-bottom: 140px;
 }
 
 .consent-buttons {
@@ -71,14 +94,6 @@ html, body {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0,0,0,.35);
   opacity: .95;
-}
-.consent-modal button {
-  border: none;
-  padding: 10px 18px;
-  font-size: 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.25s ease;
 }
 
 .consent-accept {
@@ -283,15 +298,15 @@ body {
 
 
 /*-------------------------animations-----------------------*/
+/* Nur opacity: eine transform-Animation auf body macht body zum
+   Bezugsrahmen fuer position: fixed (Consent-Leiste, Popup) */
 @keyframes transitionAnimation {
     0% {
         opacity: 0;
-        transform: translateY(-10px);
     }
 
     100% {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -1073,4 +1088,220 @@ body {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.85rem;
     margin: 12px 0 0 0;
+}
+
+
+/*-----------------------course filter + cards-----------------------*/
+.course-filter {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 10px;
+    padding: 10px 0;
+    background: rgba(9, 10, 15, 0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+}
+
+.chip {
+    font-family: var(--font);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accentColor);
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid #8f96a3;
+    border-radius: 999px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.chip-count {
+    margin-left: 6px;
+    font-weight: 400;
+    opacity: .7;
+}
+
+.chip[aria-pressed="true"] {
+    background: var(--accentColor);
+    color: var(--bgColor2);
+    border-color: var(--accentColor);
+}
+
+@media (hover: hover) {
+    .chip:hover {
+        border-color: var(--accentColor);
+    }
+}
+
+.course-section-title {
+    color: var(--accentColor);
+    font-size: 1.25rem;
+    margin: 28px 10px 12px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 6px;
+}
+
+.course-count {
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: .7;
+}
+
+.course {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 10px 12px;
+    padding: 12px 16px 12px 12px;
+    color: var(--accentColor);
+    text-decoration: none;
+    background: rgba(9, 10, 15, 0.55);
+    border: solid #8f96a3 2px;
+    border-radius: 12px;
+    transition: border-color .15s ease, transform .15s ease, background-color .15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) {
+    .course:hover {
+        border-color: var(--accentColor);
+        background: rgba(9, 10, 15, 0.8);
+        transform: translateY(-2px);
+    }
+
+    .course:hover .course-cta {
+        background: #1db954;
+    }
+}
+
+.course-free {
+    border-color: #1db954;
+}
+
+.course-img {
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.course-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.course-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.badge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.badge-new {
+    background: #ff9800;
+    color: #1a1000;
+}
+
+.badge-free {
+    background: #1db954;
+    color: #0b2e16;
+}
+
+.course-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.course-price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.price-old {
+    opacity: .6;
+    font-size: 0.9rem;
+}
+
+.price-now {
+    font-size: 1.15rem;
+    color: #1ed760;
+}
+
+.price-off {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #e53935;
+    color: #fff;
+}
+
+.course-cta {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: #1677be;
+    white-space: nowrap;
+    transition: background-color .15s ease;
+}
+
+@media screen and (max-width: 600px) {
+    .course {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .course-filter {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 10px;
+        scrollbar-width: none;
+    }
+
+    .chip {
+        flex-shrink: 0;
+    }
+
+    .course-img {
+        width: 72px;
+        height: 72px;
+    }
+
+    .course-cta {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
+
+.noscript {
+    color: var(--accentColor);
+    text-align: center;
 }
