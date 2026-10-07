@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>devopslearning</title>
-    <!-- Favicon -->
-    <link rel="icon" href="img/icon.png" type="image/x-icon" />
-    <!-- Font Awesome icons -->
-    <link rel="stylesheet" href="all.css">
-    <!-- Core theme CSS -->
-    <link rel="stylesheet" href="style.css">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>devopslearning</title>
+  <link rel="icon" href="img/icon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -24,87 +21,60 @@
   </div>
 </div>
 
+<div id="page">
+  <header class="hero">
+    <img class="hero-logo" src="img/icon.png" alt="devopslearning logo">
+    <h1 class="hero-name">devopslearning</h1>
+    <p class="hero-tagline">Hands-on courses for Linux, Windows Server, Automation &amp; AI</p>
+    <p class="hero-sub">No dry theory, no unnecessarily long courses.</p>
+    <ul id="hero-stats" class="hero-stats"></ul>
+  </header>
 
-  <!-- Parallax Pixel Background Animation -->
-    <section class="animated-background">
-      <div id="stars1"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-    </section>
-    <!-- End of Parallax Pixel Background Animation -->
+  <nav id="course-filter" class="course-filter" aria-label="Categories"></nav>
+  <main id="courses"></main>
+  <noscript>
+    <p class="noscript">Please enable JavaScript to see the course list.</p>
+  </noscript>
 
-    <a id="profilePicture" href="#popup">
-      <img src="img/icon.png" alt="Profile Picture">
-    </a>
-
-    <div class="overlay" id="popup">
-      <div class="popup">
-        <div class="popup-photo">
-          <a href="img/icon.png" target="_blank">
-            <img src="img/icon.png" alt="Profile Picture">
-          </a>
-        </div>
-        <div class="popup-quote">
-          IT courses at the best price
-        </div>
-        <a class="popup-close" onclick="history.back()">&times;</a>
-      </div>
+  <!-- Newsletter Signup Form -->
+  <div class="newsletter-box">
+    <h2 class="newsletter-title">Newsletter: helpful tips and special offers</h2>
+    <form action="https://app.kit.com/forms/9066155/subscriptions" method="post" data-sv-form="9066155"
+      data-uid="3fd8275b5a" data-format="inline" data-version="5" class="newsletter-form" id="newsletter-form">
+      <input type="email" name="email_address" placeholder="Your email address" required class="newsletter-input">
+      <button type="submit" class="newsletter-button">Subscribe</button>
+    </form>
+    <div class="newsletter-success" id="newsletter-success">
+      Please <strong>check your spam folder and inbox</strong> and confirm your subscription.
+      Successfully registered!
     </div>
+    <p class="newsletter-disclaimer">Unsubscribe at any time.</p>
+  </div>
+  <script>
+    document.getElementById('newsletter-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = this;
+      var formData = new FormData(form);
 
-    <div id="userName">
-      devopslearning
-    </div>
-
-    <div id="links">
-      <!-- Newsletter Signup Form -->
-    <div class="newsletter-box">
-      <h3 class="newsletter-title">Subscribe to the newsletter for helpful tips and special offers.</h3>
-      <form action="https://app.kit.com/forms/9066155/subscriptions" method="post" data-sv-form="9066155"
-        data-uid="3fd8275b5a" data-format="inline" data-version="5" class="newsletter-form" id="newsletter-form">
-        <input type="email" name="email_address" placeholder="Your email address" required class="newsletter-input">
-        <button type="submit" class="newsletter-button">Subscribe</button>
-      </form>
-      <div class="newsletter-success" id="newsletter-success">
-        Please <span style="color: #ff4444; font-weight: bold; font-size: 15pt;">check your spam folder and
-          inbox</span> and confirm your subscription. Successfully registered!
-      </div>
-      <p class="newsletter-disclaimer">Unsubscribe at any time.</p>
-    </div>
-    <script>
-      document.getElementById('newsletter-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        var form = this;
-        var formData = new FormData(form);
-
-        fetch(form.action, {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        }).then(function (response) {
-          if (response.ok) {
-            form.style.display = 'none';
-            document.getElementById('newsletter-success').classList.add('show');
-          }
-        }).catch(function (error) {
-          // Fallback: submit normally if fetch fails
-          form.submit();
-        });
+      fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function (response) {
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById('newsletter-success').classList.add('show');
+        }
+      }).catch(function (error) {
+        // Fallback: submit normally if fetch fails
+        form.submit();
       });
-    </script>
-    <!-- End Newsletter Signup Form -->
-      
-    <nav id="course-filter" class="course-filter" aria-label="Categories"></nav>
-    <div id="courses"></div>
-    <noscript>
-      <p class="noscript">Please enable JavaScript to see the course list.</p>
-    </noscript>
-    </div>
-
-    <div id="hashtag">
-      Special Discount on IT Courses
-    </div>
+    });
+  </script>
+  <!-- End Newsletter Signup Form -->
+</div>
 
 <script src="courses.js"></script>
 <script src="app.js"></script>

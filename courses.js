@@ -17,6 +17,9 @@ var SHOP = {
   currency: "USD",
   locale: "en-US",
 
+  // Udemy figures for the header (from the Udemy statistics page)
+  stats: { rating: 4.49, students: 4605, reviews: 731 },
+
   text: {
     all: "All",
     featured: "Start for free",
@@ -25,7 +28,10 @@ var SHOP = {
     cta: "View course →",
     ctaFree: "Watch for free →",
     course: "course",
-    courses: "courses"
+    courses: "courses",
+    rating: "rating",
+    students: "students",
+    reviews: "reviews"
   },
 
   categories: [

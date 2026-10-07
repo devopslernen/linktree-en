@@ -126,6 +126,26 @@
     filterBar.appendChild(chip(k.id, k.label, inCat(k.id).length));
   });
 
+  // Kennzahlen im Kopfbereich; Kursanzahl ergibt sich aus der Liste
+  var stats = document.getElementById("hero-stats");
+  if (stats && SHOP.stats) {
+    var num = new Intl.NumberFormat(SHOP.locale);
+    var one = new Intl.NumberFormat(SHOP.locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    [
+      [one.format(SHOP.stats.rating), T.rating, true],
+      [num.format(SHOP.stats.students), T.students],
+      [num.format(SHOP.stats.reviews), T.reviews],
+      [String(SHOP.courses.length), T.courses]
+    ].forEach(function (st) {
+      var li = el("li");
+      var v = el("span", "stat-value", st[0]);
+      if (st[2]) v.appendChild(el("span", "star", " ★"));
+      li.appendChild(v);
+      li.appendChild(el("span", "stat-label", st[1]));
+      stats.appendChild(li);
+    });
+  }
+
   var start = new URLSearchParams(window.location.search).get("kat");
   var valid = SHOP.categories.some(function (k) { return k.id === start; });
   select(valid ? start : "", false);
