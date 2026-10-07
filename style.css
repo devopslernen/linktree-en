@@ -20,17 +20,18 @@
 }
 
 /* =====================================
-   Farben (aus dem Logo: Navy + Cyan, Orange nur fuer "Kaufen")
+   Farben: Schwarz + Orange
 ===================================== */
 :root {
-    --bg: #0b1220;
-    --bg2: #111a2e;
-    --surface: #151f33;
-    --surface-hover: #1a2640;
-    --border: #26324a;
-    --text: #e6edf7;
-    --muted: #94a3b8;
-    --brand: #38bdf8;
+    --bg: #0a0a0a;
+    --bg2: #141414;
+    --surface: #161616;
+    --surface-hover: #1e1e1e;
+    --border: #2a2a2a;
+    --text: #f2f2f2;
+    --muted: #a3a3a3;
+    --brand: #ff8a1f;
+    --brand-rgb: 255, 138, 31;
     --buy: #ff8a1f;
     --buy-hover: #ff9d42;
     --buy-text: #1f1000;
@@ -61,8 +62,8 @@ body::before {
     inset: 0;
     z-index: -1;
     background:
-        radial-gradient(circle at 1px 1px, rgba(148, 163, 184, .12) 1px, transparent 0) 0 0 / 24px 24px,
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(56, 189, 248, .14), transparent 70%),
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .07) 1px, transparent 0) 0 0 / 24px 24px,
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(var(--brand-rgb), .14), transparent 70%),
         linear-gradient(180deg, var(--bg2), var(--bg));
 }
 
@@ -86,11 +87,17 @@ body::before {
     padding: 40px 0 8px;
 }
 
+.hero-logo-ring {
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 0;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px rgba(var(--brand-rgb), .5);
+}
+
 .hero-logo {
     width: 88px;
     height: 88px;
     border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px rgba(56, 189, 248, .5);
 }
 
 .hero-name {
@@ -184,7 +191,7 @@ body::before {
     gap: 8px;
     margin: 24px 0 0;
     padding: 10px 0;
-    background: rgba(11, 18, 32, .88);
+    background: rgba(10, 10, 10, .88);
     backdrop-filter: blur(8px);
 }
 
@@ -195,11 +202,29 @@ body::before {
     color: var(--text);
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 7px 14px;
+    border-radius: 14px;
+    padding: 6px 14px;
+    line-height: 1.25;
     cursor: pointer;
     transition: border-color .15s ease, background-color .15s ease, color .15s ease;
     -webkit-tap-highlight-color: transparent;
+}
+
+.chip-label {
+    display: block;
+}
+
+.chip-hint {
+    display: block;
+    margin-top: 1px;
+    font-size: .7rem;
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.chip[aria-pressed="true"] .chip-hint {
+    color: var(--buy-text);
+    opacity: .75;
 }
 
 .chip-count {
@@ -211,11 +236,11 @@ body::before {
 .chip[aria-pressed="true"] {
     background: var(--brand);
     border-color: var(--brand);
-    color: var(--bg);
+    color: var(--buy-text);
 }
 
 .chip[aria-pressed="true"] .chip-count {
-    color: var(--bg);
+    color: var(--buy-text);
     opacity: .7;
 }
 
@@ -230,12 +255,20 @@ body::before {
 ===================================== */
 .course-section-title {
     display: flex;
-    align-items: baseline;
+    align-items: flex-end;
     justify-content: space-between;
     margin: 28px 0 12px;
     padding-bottom: 6px;
     font-size: 1.2rem;
     border-bottom: 1px solid var(--border);
+}
+
+.course-section-hint {
+    display: block;
+    margin-top: 2px;
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--muted);
 }
 
 .course-count {
@@ -262,8 +295,8 @@ body::before {
 @media (hover: hover) {
     .course:hover {
         background: var(--surface-hover);
-        border-color: rgba(56, 189, 248, .6);
-        box-shadow: 0 0 0 1px rgba(56, 189, 248, .25), 0 8px 24px rgba(56, 189, 248, .12);
+        border-color: rgba(var(--brand-rgb), .6);
+        box-shadow: 0 0 0 1px rgba(var(--brand-rgb), .25), 0 8px 24px rgba(var(--brand-rgb), .12);
     }
 
     .course:hover .course-cta {
@@ -314,6 +347,12 @@ body::before {
     color: var(--buy-text);
     background: var(--buy);
     border-color: var(--buy);
+}
+
+.badge-best {
+    color: #1f1600;
+    background: #fbbf24;
+    border-color: #fbbf24;
 }
 
 .badge-free {
@@ -470,7 +509,7 @@ body::before {
     font-size: 1rem;
     font-weight: 700;
     font-family: var(--font);
-    color: var(--bg);
+    color: var(--buy-text);
     background: var(--brand);
     border: none;
     border-radius: 8px;
@@ -489,8 +528,8 @@ body::before {
     padding: 14px 18px;
     line-height: 1.4;
     border-radius: 8px;
-    background: rgba(56, 189, 248, .12);
-    border: 1px solid rgba(56, 189, 248, .4);
+    background: rgba(var(--brand-rgb), .12);
+    border: 1px solid rgba(var(--brand-rgb), .4);
 }
 
 .newsletter-success.show {
@@ -554,7 +593,7 @@ body::before {
     max-width: 640px;
     box-sizing: border-box;
     padding: 14px 18px;
-    background: rgba(21, 31, 51, .97);
+    background: rgba(22, 22, 22, .97);
     border: 1px solid var(--border);
     border-radius: 14px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, .5);
@@ -604,7 +643,7 @@ body::before {
 }
 
 .consent-accept {
-    color: var(--bg);
+    color: var(--buy-text);
     background: var(--brand);
     border: 1px solid var(--brand);
 }

@@ -43,6 +43,7 @@
 
     var badges = el("div", "course-badges");
     if (c.free) badges.appendChild(el("span", "badge badge-free", T.free));
+    if (c.bestseller) badges.appendChild(el("span", "badge badge-best", T.bestseller));
     if (c.isNew) badges.appendChild(el("span", "badge badge-new", T.isNew));
     if (c.level) badges.appendChild(el("span", "badge", c.level));
     if (badges.childNodes.length) body.appendChild(badges);
@@ -65,9 +66,12 @@
     return a;
   }
 
-  function section(title, list) {
+  function section(title, list, hint) {
     var s = el("section", "course-section");
-    var h = el("h2", "course-section-title", title);
+    var h = el("h2", "course-section-title");
+    var name = el("span", "course-section-name", title);
+    if (hint) name.appendChild(el("small", "course-section-hint", hint));
+    h.appendChild(name);
     h.appendChild(el("span", "course-count", list.length + " " + (list.length === 1 ? T.course : T.courses)));
     s.appendChild(h);
     list.forEach(function (c) { s.appendChild(card(c)); });
@@ -82,15 +86,18 @@
     root.innerHTML = "";
     if (catId) {
       var cat = SHOP.categories.filter(function (k) { return k.id === catId; })[0];
-      root.appendChild(section(cat.label, inCat(catId)));
+      root.appendChild(section(cat.label, inCat(catId), cat.hint));
       return;
     }
-    // "Alle": Gratis-Kurse oben, danach jeder Kurs genau einmal in seiner Hauptkategorie
+    // "Alle": jeder Kurs genau einmal in seiner Hauptkategorie,
+    // Gratis-Kurse als eigener Abschnitt an zweiter Stelle (nach dem Topseller-Bereich)
     var free = SHOP.courses.filter(function (c) { return c.free; });
-    if (free.length) root.appendChild(section(T.featured, free));
+    var shown = 0;
     SHOP.categories.forEach(function (k) {
       var list = SHOP.courses.filter(function (c) { return !c.free && c.cats[0] === k.id; });
-      if (list.length) root.appendChild(section(k.label, list));
+      if (!list.length) return;
+      root.appendChild(section(k.label, list, k.hint));
+      if (++shown === 1 && free.length) root.appendChild(section(T.featured, free));
     });
   }
 
@@ -109,11 +116,14 @@
     if (scroll) filterBar.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function chip(id, label, count) {
-    var b = el("button", "chip", label);
+  function chip(id, label, count, hint) {
+    var b = el("button", "chip");
     b.type = "button";
     b.dataset.cat = id;
-    b.appendChild(el("span", "chip-count", String(count)));
+    var top = el("span", "chip-label", label);
+    top.appendChild(el("span", "chip-count", String(count)));
+    b.appendChild(top);
+    if (hint) b.appendChild(el("span", "chip-hint", hint));
     b.addEventListener("click", function () {
       track("filter/" + (id || "alle"), label);
       select(id, true);
@@ -123,7 +133,7 @@
 
   filterBar.appendChild(chip("", T.all, SHOP.courses.length));
   SHOP.categories.forEach(function (k) {
-    filterBar.appendChild(chip(k.id, k.label, inCat(k.id).length));
+    filterBar.appendChild(chip(k.id, k.label, inCat(k.id).length, k.hint));
   });
 
   // Kennzahlen im Kopfbereich; Kursanzahl ergibt sich aus der Liste
