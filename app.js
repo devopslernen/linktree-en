@@ -74,7 +74,9 @@
     h.appendChild(name);
     h.appendChild(el("span", "course-count", list.length + " " + (list.length === 1 ? T.course : T.courses)));
     s.appendChild(h);
-    list.forEach(function (c) { s.appendChild(card(c)); });
+    var grid = el("div", "course-grid");
+    list.forEach(function (c) { grid.appendChild(card(c)); });
+    s.appendChild(grid);
     return s;
   }
 
