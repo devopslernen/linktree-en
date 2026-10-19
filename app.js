@@ -19,10 +19,17 @@
     return c.url || "https://www.udemy.com/course/" + c.slug + "/?couponCode=" + encodeURIComponent(SHOP.coupon);
   }
 
+  // Herkunft aus dem Link (?src=youtube usw.); GoatCounter wertet dieselben
+  // Parameter beim Seitenaufruf selbst aus, hier geht sie zusaetzlich an jeden Kurs-Klick
+  var params = new URLSearchParams(window.location.search);
+  var source = params.get("src") || params.get("utm_source") || params.get("source") || params.get("ref");
+
   function track(path, title) {
     if (window.goatcounter && window.goatcounter.count) {
       // Sprache voranstellen: DE- und EN-Seite zaehlen in dasselbe GoatCounter-Konto
-      window.goatcounter.count({ path: document.documentElement.lang + "/" + path, title: title, event: true });
+      var data = { path: document.documentElement.lang + "/" + path, title: title, event: true };
+      if (source) data.referrer = source;
+      window.goatcounter.count(data);
     }
   }
 
