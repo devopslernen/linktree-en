@@ -5,7 +5,7 @@
 
 var SHOP = {
   // Current Udemy coupon code – appended to every course link
-  coupon: "LINK-2026-09",
+  coupon: "LINK-2026-10",
 
   // Coupon price
   price: 12.99,
@@ -38,8 +38,8 @@ var SHOP = {
   // Reihenfolge = Reihenfolge auf der Seite; hint = kleiner Text unter dem Namen
   categories: [
     { id: "virtualization", label: "Virtualization", hint: "Proxmox · Hyper-V" },
-    { id: "automation", label: "Automation & DevOps", hint: "Ansible · AWX · PowerShell" },
-    { id: "ai", label: "AI (Claude/Codex)", hint: "Agentic Engineering · Admin" },
+    { id: "automation", label: "Automation & DevOps", hint: "Ansible · Terraform · AWX" },
+    { id: "ai", label: "AI", hint: "Claude Code · Codex · local LLMs" },
     { id: "network", label: "Network & Security", hint: "FortiGate · Linux Security" },
     { id: "windows", label: "Windows & Microsoft", hint: "Server · PowerShell · Hyper-V" },
     { id: "linux", label: "Linux", hint: "Security · Administration" }
@@ -58,6 +58,21 @@ var SHOP = {
      listPrice  optional: differing anchor price */
   // Reihenfolge: neue Kurse zuerst, dann Gratis, dann nach Verkaeufen (Stand 10/2026)
   courses: [
+    {
+      slug: "local-ai",
+      title: "Local AI with Ollama & Open WebUI: Run Your Own Private AI",
+      img: "lokale-ki-thumbnail-en-sq.png", cats: ["ai"], isNew: true
+    },
+    {
+      slug: "proxmox-datacenter-manager-next-level-proxmox-management",
+      title: "Proxmox Datacenter Manager: Next-Level Proxmox Management",
+      img: "pdm-thumbnail-server-en-sq.png", cats: ["virtualization"], isNew: true
+    },
+    {
+      slug: "terraform-iac-with-proxmox-and-ansible",
+      title: "Terraform & Infrastructure as Code with Proxmox and Ansible",
+      img: "terraform-thumbnail-en-sq.png", cats: ["automation", "virtualization"], isNew: true
+    },
     {
       slug: "linux-security-hardening-auditing-practical-course",
       title: "Linux Security Hardening & Auditing: Practical Course",
